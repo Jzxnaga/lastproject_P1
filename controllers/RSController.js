@@ -21,10 +21,19 @@ class RestaurantsController {
 
     static findOneWithReviews(req,res){
       const idRestaurant = req.params.id
-      Restaurant.findByPk(idRestaurant, {include:{model:Review}
+      Restaurant.findByPk(idRestaurant, {include:{model:User}
       })
       .then(data=>{
-        res.send(data)
+
+        // for(let i = 0 ; i < data.dataValues.Users.length ; i++){ 
+        // console.log(data.dataValues.Users[i].dataValues.username)
+        // console.log(data.dataValues.Users[i].dataValues.name)
+        // console.log(data.dataValues.Users[i].dataValues.Review.dataValues.review)
+        // console.log(data)
+        // }
+        
+
+        res.render('reviews',{data})
       })
       .catch(err => {
         res.send(err)

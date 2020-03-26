@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<body>
+    <div class="container mt-5">
+        <h2>Restoran <%= data.name %></h2>
+        <h4>email <%= data.email %></h4>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Review</th>
+                    <th>Rating</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <%for(let i = 0 ; i < data.dataValues.Users.length ; i++){%>
+                <tr>
+
+                    <td> <%= data.dataValues.Users[i].dataValues.username%> </td>
+                    <td> <%= data.dataValues.Users[i].dataValues.name%> </td>
+                    <td> <%= data.dataValues.Users[i].dataValues.Review.dataValues.review%> </td>
+                    <th> <%= data.dataValues.Users[i].dataValues.Review.dataValues.rating%></th>
+                </tr>
+                <%}%>
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+<%- include('partials/footer') %>
