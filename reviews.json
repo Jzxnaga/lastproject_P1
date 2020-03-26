@@ -1,0 +1,16 @@
+[
+    {
+        "RestaurantId": 1,
+        "UserId": 1,
+        "review": "pelayan galak",
+        "rating": 4
+    },
+
+    {
+        "RestaurantId": 1,
+        "UserId": 2,
+        "review": "pelayan galak",
+        "rating": 4
+    }
+
+]

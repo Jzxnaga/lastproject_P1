@@ -1,0 +1,18 @@
+[
+    {
+        "username": "taki",
+        "password": "dbuser123",
+        "name": "Takitaki",
+        "email": "makanterus@gmail.com",
+        "age": 25
+    },
+
+    {
+        "username": "takitaki",
+        "password": "dbuser123",
+        "name": "Takitaki",
+        "email": "makanterusz@gmail.com",
+        "age": 25
+    }
+
+]

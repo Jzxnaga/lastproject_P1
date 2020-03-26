@@ -5,7 +5,7 @@ const routes = require('./routes/router')
 
 const session = require('express-session')
 
-const port = process.env.PORT || 3000
+const port = 3000
 app.set('view engine', 'ejs');
 
 app.use(session({
@@ -15,12 +15,12 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-app.use(express.json())
+// app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
 
 app.use('/', routes);
 
 app.listen(port,()=>{
-  console.log(`listen server`)
+  console.log(`running on ${port}`)
 })
