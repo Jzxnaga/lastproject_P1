@@ -19,14 +19,13 @@
 
                 <%for(let i = 0 ; i < data.dataValues.Users.length ; i++){%>
                 <tr>
-
                     <td> <%= data.dataValues.Users[i].dataValues.username%> </td>
                     <td> <%= data.dataValues.Users[i].dataValues.name%> </td>
                     <td> <%= data.dataValues.Users[i].dataValues.Review.dataValues.review%> </td>
                     <th> <%= data.dataValues.Users[i].dataValues.Review.dataValues.rating%></th>
                 </tr>
                 <%}%>
-
+                <a href="/restaurant/<%= data.id%>/add-review"><button>add review for this restaurant</button></a>
 
             </tbody>
         </table>

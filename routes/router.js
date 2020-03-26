@@ -42,8 +42,8 @@ routes.get('/logout', (req, res) =>{
 // yang dibawah ini menuju restaurants semua //
 routes.get('/restaurant/:id', cekLogin, RestaurantsController.findOneWithReviews)
 
-routes.get('/Restaurants/:id/add-review', cekLogin, RestaurantsController.addReview)
-routes.post('/Restaurants/:id/add-review', cekLogin, RestaurantsController.addReviewPost)
+routes.get('/restaurant/:id/add-review', cekLogin, RestaurantsController.addReview)
+routes.post('/restaurant/:id/add-review', cekLogin, RestaurantsController.addReviewPost)
 
 routes.get('/Restaurants/:id/edit-review', cekLogin, RestaurantsController.editReview)
 

@@ -21,68 +21,23 @@ class RestaurantsController {
 
     static findOneWithReviews(req,res){
       const idRestaurant = req.params.id
-      Restaurant.findByPk(idRestaurant, {include:{model:User}
+      
+      Restaurant.findByPk(idRestaurant , {include:{model:User}
       })
       .then(data=>{
-
-        // for(let i = 0 ; i < data.dataValues.Users.length ; i++){ 
-        // console.log(data.dataValues.Users[i].dataValues.username)
-        // console.log(data.dataValues.Users[i].dataValues.name)
-        // console.log(data.dataValues.Users[i].dataValues.Review.dataValues.review)
-        // console.log(data)
-        // }
-        
-
+        console.log(req.session.name)//inituh username
         res.render('reviews',{data})
       })
       .catch(err => {
         res.send(err)
       })
-    // let restaurant;
-    // let userId;
-    // User.findOne({
-    //   where: {
-    //     username: req.session.user.name
-    //     }
-    //   })
-    //   .then(user => {
-    //     userId = user.dataValues.id
-    //     return Restaurant
-    //     .findByPk(req.params.id, {include: [
-    //       {
-    //         model: Review,
-    //         include: [User]
-    //       }
-    //     ]})
-    //   })
-    //   .then(foundRestaurant => {
-    //     restaurant = foundRestaurant
-    //     return Restaurant.getAverageRating()
-    //   })
-    //   .then(averageRating => {
-    //     restaurant.setDataValue('averageRating', averageRating)
-    //     return Review
-    //     .findOne({
-    //       where: {
-    //         RestaurantId: restaurant.id,
-    //         UserId: userId
-    //       }
-    //     })
-    //   })
-    //   .then(loggedUserReview => {
-    //     res.render('restaurantsreviews', {Restaurant, err:req.query.err, loggedUserReview})
-    //   })
-    //   .catch(err => {
-    //     res.send(err.message)
-    //     // res.redirect(`/movies/${req.params.id}?err=${err.message}`)
-    // })
     }
 
     static addReview (req, res) {
-      Restaurant
-      .findByPk(req.params.id)
+      Restaurant.findByPk(req.params.id)
       .then(data => {
-        res.render('restaurantsreviews', {data, err:req.query.err})
+        // console.log(data.dataValues)
+        res.render('addingreviews', {data : data.dataValues, err:req.query.err})
       })
       .catch(err => {
         res.redirect(`/restaurants/${req.params.id}?err=${err.message}`)
@@ -93,9 +48,12 @@ class RestaurantsController {
 //// ini kolom add ngebentuk database  tabel review ////
 
     static addReviewPost (req, res) {
+      console.log(req.params.id)
+      console.log(req.body.review)
+      console.log(req.session.user.name)
+      
       let userId
-      User.
-      findOne({
+      User.findOne({
         where: {
           username: req.session.user.name
         }
@@ -104,18 +62,18 @@ class RestaurantsController {
         userId = user.dataValues.id
         return Review
         .create({
-          UserId: userId,
           RestaurantId: req.params.id,
-          reviewTitle: req.body.review,
-          rating: req.body.rating
+          UserId: userId,
+          review: req.body.review,
+          rating: Number(req.body.rating)
           
         })
       })
       .then(created => {
-        res.redirect(`/restaurants/${req.params.id}`)
+        res.redirect(`/restaurant/${req.params.id}`)
       })
       .catch(err => {
-        res.redirect(`/restaurants/${req.params.id}/add-review/?err=${err.message}`)
+        res.redirect(`/restaurant/${req.params.id}/add-review/?err=${err.message}`)
       })
     }
 

@@ -6,12 +6,16 @@ class AuthController {
       User.findOrCreate ({
         where:{
           username: req.body.username,
-          password: req.body.password
+          password: req.body.password,
+          name: req.body.name,
+          email: req.body.email,
+          age: req.body.age
         }
       })
       .then (([user, created])=>{
         if (created) {
-          res.redirect('/movies')
+          
+          res.redirect('/')
         }
       })
       .catch (err =>{

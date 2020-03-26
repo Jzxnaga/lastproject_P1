@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="container mt-5">
+    <h2>Menambahkan Review</h2>
+    <h6> untuk Restaurant</h6>
+    <h7> <%= data.name %> </h7>
+    <h7> , Owner : <%= data.owner %> </h7>
+    <h7> , E-mail : <%= data.email %> </h7>
+    
+    <form action="/restaurant/<%= data.id %>/add-review" method="post"> 
+    <table class="table"></table>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Masukan Komentar anda</label>
+        <textarea class="form-control" name="review" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <label for="rating">Pilih Rating</label>
+        <select class="form-control" name="rating">
+            <option selected>--Rate Here--</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        </select>
+    <button type = "Submit"> Submit </button>
+    </form>
+
+
+
+
+</div>
+
+
+
+<%- include('partials/footer') %>
