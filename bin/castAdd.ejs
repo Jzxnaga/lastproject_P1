@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang=eng>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <title>Actor / Actress </title>
+    </head>
+    <body>
+
+        <h1>Add Actor / Actress </h1>
+            <form action="/cs/add" method="post">
+                <!-- <label for = "">ID</label>
+                <input type="text" name="id"> <br> <br> -->
+                <br>
+                <label for = "">First Name</label>
+                <input type="text" name="first_name"> <br> <br>
+                <br>
+                <label for = "">Last Name</label>
+                <input type="text" name="last_name"> <br> <br>
+                <br>
+                <label for = "">Phone Number</label>
+                <input type= "text" name="phone_number"><br> <br>
+                <label for = "">Birth Year </label>
+                <input type= "text" name="birth_year"><br> <br>
+                <label for = "">Gender</label>
+                <input type= "text" name="gender"><br> <br>
+        
+        
+                <label for="movie">Movie</label><br>
+                <select name="movie">
+                  <% const listmovies = data %>
+                  <% for(let i =0; i<listmovies.length;i++){ %>
+                      <option value="<%= listmovies[i].id %>"><%= listmovies[i].name %></option>
+                    <% } %>
+                
+                </select>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            <button type = "Submit"> Submit </button>
+            </form>
+    </body>
+
+
+</table>
+</p1>
+</html>

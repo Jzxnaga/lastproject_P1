@@ -20,44 +20,53 @@ class RestaurantsController {
     }
 
     static findOneWithReviews(req,res){
-    let restaurant;
-    let userId;
-    User.findOne({
-      where: {
-        username: req.session.user.name
-        }
+      const idRestaurant = req.params.id
+      Restaurant.findByPk(idRestaurant, {include:{model:Review}
       })
-      .then(user => {
-        userId = user.dataValues.id
-        return Restaurant
-        .findByPk(req.params.id, {include: [
-          {
-            model: Review,
-            include: [User]
-          }
-        ]})
-      })
-      .then(foundRestaurant => {
-        restaurant = foundRestaurant
-        return Restaurant.getAverageRating()
-      })
-      .then(averageRating => {
-        restaurant.setDataValue('averageRating', averageRating)
-        return Review
-        .findOne({
-          where: {
-            RestaurantId: restaurant.id,
-            UserId: userId
-          }
-        })
-      })
-      .then(loggedUserReview => {
-        res.render('restaurantsreviews', {Restaurant, err:req.query.err, loggedUserReview})
+      .then(data=>{
+        res.send(data)
       })
       .catch(err => {
-        res.send(err.message)
-        // res.redirect(`/movies/${req.params.id}?err=${err.message}`)
+        res.send(err)
       })
+    // let restaurant;
+    // let userId;
+    // User.findOne({
+    //   where: {
+    //     username: req.session.user.name
+    //     }
+    //   })
+    //   .then(user => {
+    //     userId = user.dataValues.id
+    //     return Restaurant
+    //     .findByPk(req.params.id, {include: [
+    //       {
+    //         model: Review,
+    //         include: [User]
+    //       }
+    //     ]})
+    //   })
+    //   .then(foundRestaurant => {
+    //     restaurant = foundRestaurant
+    //     return Restaurant.getAverageRating()
+    //   })
+    //   .then(averageRating => {
+    //     restaurant.setDataValue('averageRating', averageRating)
+    //     return Review
+    //     .findOne({
+    //       where: {
+    //         RestaurantId: restaurant.id,
+    //         UserId: userId
+    //       }
+    //     })
+    //   })
+    //   .then(loggedUserReview => {
+    //     res.render('restaurantsreviews', {Restaurant, err:req.query.err, loggedUserReview})
+    //   })
+    //   .catch(err => {
+    //     res.send(err.message)
+    //     // res.redirect(`/movies/${req.params.id}?err=${err.message}`)
+    // })
     }
 
     static addReview (req, res) {
@@ -102,11 +111,12 @@ class RestaurantsController {
     }
 
     static editReview (req, res) {
+      console.log()
       let restaurant
       Restaurant
       .findByPk(req.params.id)
-      .then(foundMovie => {
-        restaurant = foundMovie
+      .then(foundRestaurant => {
+        restaurant = foundRestaurant
         return Review
         .findOne({
           where: {

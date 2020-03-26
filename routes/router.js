@@ -4,38 +4,43 @@ const controllerAuth = require('../controllers/AuthController.js')
 const ReviewsController = require('../controllers/RWController')
 
 const cekLogin = function (req, res, next){
+  
   if(!req.session.user){
+    console.log(err)
     res.redirect(`/login`)
   } else {
     next()
   }
 }
 
-routes.get('/', RestaurantsController.findAll)
 
-routes.get('/rest', RestaurantsController.findAll)
+routes.get('/login', (req, res) =>{
+  // res.send('testlogin')
+  res.render ('login', {err:req.query.err})
+})
+routes.post('/login', controllerAuth.login)
 
 /// masukin ke kolom registrasi view register ///
 routes.get('/register', (req,res) =>{
   res.render('register', {err:req.query.err})
 })
-
 routes.post('/register', controllerAuth.register)
-routes.get('/login', (req, res) =>{
-  res.render ('login', {err:req.query.err})
+
+routes.get('/',(req,res)=>{
+  res.render('home')
 })
 
-routes.post('/login', controllerAuth.login)
+routes.get('/restaurant',cekLogin, RestaurantsController.findAll)
+
 
 routes.get('/logout', (req, res) =>{
   req.session.destroy(function (err){
-    console.log('ceklogout')
-    res.redirect('/Restaurants')
+    res.redirect('/')
   })
 })
 
 // yang dibawah ini menuju restaurants semua //
-routes.get('/Restaurants/:id', cekLogin, RestaurantsController.findOneWithReviews)
+routes.get('/restaurant/:id', cekLogin, RestaurantsController.findOneWithReviews)
 
 routes.get('/Restaurants/:id/add-review', cekLogin, RestaurantsController.addReview)
 routes.post('/Restaurants/:id/add-review', cekLogin, RestaurantsController.addReviewPost)

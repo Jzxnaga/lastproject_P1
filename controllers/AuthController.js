@@ -1,5 +1,5 @@
-const User = require('../models').User
-
+const {User} = require('../models')
+const bcrypt = require('bcrypt')
 
 class AuthController {
     static register (req,res) {
@@ -18,15 +18,17 @@ class AuthController {
         res.redirect(`/register?err=${err.message}`)
       })
     }
+
+    //jika dia login//
   
     static login (req, res) {
+      // res.send('uda masuk login nih')
       User.findOne ({
         where: {
           username: req.body.username
         }
       })
       .then ((user)=>{
-        
         const password = req.body.password
         bcrypt.compare(password, user.password)
         .then(pass => {
@@ -34,7 +36,7 @@ class AuthController {
             name: user.username
           }
           
-          res.redirect('/movies')
+          res.redirect('/restaurant')
         });
       })
       .catch (err =>{

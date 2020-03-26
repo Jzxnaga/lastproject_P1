@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>List Production Houses</title>
+  </head>
+  <body>
+    <h1>Production Houses</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Headquarter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i< data.length; i++){ %>
+        <tr>
+          <td><%= data[i].name_prodHouse %></td>
+          <td><%= data[i].headquarters %></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </body>
+</html>
