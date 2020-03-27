@@ -5,7 +5,7 @@ const routes = require('./routes/router')
 
 const session = require('express-session')
 
-const port = 3000
+const port = process.env.PORT || 3000
 app.set('view engine', 'ejs');
 
 app.use(session({
